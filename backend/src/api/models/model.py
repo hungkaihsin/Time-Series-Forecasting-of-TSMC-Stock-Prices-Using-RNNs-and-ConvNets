@@ -2,14 +2,10 @@
 from keras.models import Sequential
 from keras.layers import Dense, Input, LSTM
 import tensorflow as tf
-from keras_tuner import RandomSearch
-import os
 
 
 
-
-
-def build_lstm_model(hp):
+def lstm_model(hp):
     model = Sequential()
     model.add(Input(shape=(7, 4)))  # Shape: look_back, num_features
     model.add(LSTM(units=hp.Int('lstm_units', 32, 128, step=32), return_sequences=False))
@@ -23,15 +19,3 @@ def build_lstm_model(hp):
     model.compile(optimizer=optimizer, loss='mae', metrics=['mae'])
     return model
 
-
-def lstm_tuner(log_dir='src/dataset/tuning', project_name='lstm'):
-    fullpath = os.path.abspath(os.path.join(log_dir, project_name))
-    tuner = RandomSearch(
-        build_lstm_model,
-        objective='val_mae',
-        max_trials=30,
-        executions_per_trial=2,
-        directory=log_dir,
-        project_name=project_name
-    )
-    return tuner
