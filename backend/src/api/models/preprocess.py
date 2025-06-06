@@ -55,5 +55,7 @@ def preprocess_dataset(file_path, look_back=7, foresight=1):
         "y_test": y_test_seq,
         "feature_scaler": feature_scaler,
         "target_scaler": target_scaler,
-        "df": df
+        "df": df,
+        "train_size": train_size,
+        "val_size": val_size
     }

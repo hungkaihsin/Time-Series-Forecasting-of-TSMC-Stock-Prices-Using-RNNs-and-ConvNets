@@ -46,7 +46,10 @@ def lstm_prediction():
         'y_val_true': y_val_true,
         'y_val_pred': y_val_pred,
         'y_test_pred': y_test_pred,
-        'y_test_true': y_test_true
+        'y_test_true': y_test_true,
+        'df': df,
+        'train_size': data["train_size"],
+        'val_size': data["val_size"]
     }
 
     return result
