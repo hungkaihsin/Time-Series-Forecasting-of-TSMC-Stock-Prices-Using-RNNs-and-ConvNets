@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
-def create_sequence(X, y, look_back=7, foresight=1):
+def create_sequence(X, y, look_back= 21, foresight=1):
     X_seq, y_seq = [], []
     for i in range(len(X) - look_back - foresight):
         X_seq.append(X[i:i+look_back])
@@ -11,7 +11,7 @@ def create_sequence(X, y, look_back=7, foresight=1):
 
 
 
-def preprocess_dataset(file_path, look_back=7, foresight=1):
+def preprocess_dataset(file_path, look_back=21, foresight=1):
     df = pd.read_csv(file_path)
     df = df.drop(index=[0, 1])
     df.ffill(inplace=True)

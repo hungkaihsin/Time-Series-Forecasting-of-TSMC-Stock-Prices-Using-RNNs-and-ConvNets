@@ -22,7 +22,7 @@ def plot(prediction_data):
 
 
     # Validation set
-    val_start_index = train_size + 7
+    val_start_index = train_size + 21
     val_dates = df['Price'].iloc[val_start_index:val_start_index+ len(y_val_true)]
     fig_val = go.Figure()
     fig_val.add_trace(go.Scatter(x=val_dates, y=y_val_true, mode="lines", name="True"))
@@ -31,7 +31,7 @@ def plot(prediction_data):
     fig_val.show()
 
     # Test set
-    test_start_index = train_size + val_size + 7
+    test_start_index = train_size + val_size + 21
     test_dates = df["Price"].iloc[test_start_index: test_start_index + len(y_test_true)]
 
     fig_test = go.Figure()

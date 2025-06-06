@@ -5,8 +5,9 @@ import tensorflow as tf
 
 
 def lstm_model(hp):
+
     model = Sequential()
-    model.add(Input(shape=(7, 4)))  # Shape: look_back, num_features
+    model.add(Input(shape=(21, 4)))  # Shape: look_back, num_features
     model.add(LSTM(units=hp.Int('lstm_units', 32, 128, step=32), return_sequences=False))
     model.add(Dense(units=hp.Int('dense_units', 16, 64, step=16), activation='relu'))
     model.add(Dense(1, activation='linear'))
@@ -22,7 +23,7 @@ def lstm_model(hp):
 
 def gru_model(hp):
     model = Sequential()
-    model.add(Input(shape=(7, 4)))
+    model.add(Input(shape=(21, 4)))
     model.add(GRU(units=hp.Int('gru_units', 32, 128, step=32), return_sequences=False))
     model.add(Dense(units=hp.Int('dense_units', 16, 64, step=16), activation='relu'))
     model.add(Dense(1, activation='linear'))
@@ -43,7 +44,7 @@ def gru_model(hp):
 
 def conv1d_model(hp):
     model = Sequential()
-    model.add(Input(shape=(7, 4)))
+    model.add(Input(shape=(21, 4)))
     model.add(Conv1D(filters=hp.Int('filters', 32, 128, step=32),
                      kernel_size=hp.Choice('kernel_size', [2, 3]),
                      activation='relu'))
@@ -66,7 +67,7 @@ def conv1d_model(hp):
 
 def ffn_model(hp):
     model = Sequential()
-    model.add(Input(shape=(7 * 4,)))  # 7 timesteps × 4 features = 28 inputs
+    model.add(Input(shape=(21 * 4,)))  # 21 timesteps × 4 features = 84 inputs
     model.add(Dense(units=hp.Int('dense1', 32, 128, step=32), activation='relu'))
     model.add(Dense(units=hp.Int('dense2', 16, 64, step=16), activation='relu'))
     model.add(Dense(1, activation='linear'))
