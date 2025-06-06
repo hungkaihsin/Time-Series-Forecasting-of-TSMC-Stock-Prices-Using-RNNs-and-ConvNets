@@ -4,7 +4,6 @@ from keras.layers import Dense, Input, LSTM
 import tensorflow as tf
 
 
-
 def lstm_model(hp):
     model = Sequential()
     model.add(Input(shape=(7, 4)))  # Shape: look_back, num_features
