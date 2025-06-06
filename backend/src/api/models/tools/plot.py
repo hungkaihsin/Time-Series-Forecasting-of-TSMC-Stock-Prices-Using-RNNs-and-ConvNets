@@ -15,6 +15,11 @@ def plot(prediction_data):
     df = result_dict['df']
     train_size = result_dict['train_size']
     val_size = result_dict['val_size']
+    mae_val_dollar = result_dict['mae_val_dollar']
+    mae_val_percentage = result_dict['mae_val_percentage']
+    mae_test_dollar = result_dict['mae_test_dollar']
+    mae_test_percent = result_dict['mae_test_percent']
+
 
     # Validation set
     val_start_index = train_size + 7
@@ -22,7 +27,7 @@ def plot(prediction_data):
     fig_val = go.Figure()
     fig_val.add_trace(go.Scatter(x=val_dates, y=y_val_true, mode="lines", name="True"))
     fig_val.add_trace(go.Scatter(x=val_dates, y=y_val_pred, mode="lines", name="Prediction"))
-    fig_val.update_layout(title_text='Validation Comparison', xaxis_title='Date', yaxis_title='Price')
+    fig_val.update_layout(title_text=f'Validation Comparison<br>MAE: {mae_val_dollar:.2f} ({mae_val_percentage:.2f}%)', xaxis_title='Date', yaxis_title='Price')
     fig_val.show()
 
     # Test set
@@ -32,5 +37,5 @@ def plot(prediction_data):
     fig_test = go.Figure()
     fig_test.add_trace(go.Scatter(x=test_dates, y=y_test_true, mode='lines', name="True"))
     fig_test.add_trace(go.Scatter(x=test_dates, y=y_test_pred, mode='lines', name='Prediction'))
-    fig_test.update_layout(title_text="Test Comparision", xaxis_title='Date', yaxis_title='Price')
+    fig_test.update_layout(title_text=f"Test Comparision<br>MAE: {mae_test_dollar:.2f} ({mae_test_percent:.2f}%)", xaxis_title='Date', yaxis_title='Price')
     fig_test.show()
