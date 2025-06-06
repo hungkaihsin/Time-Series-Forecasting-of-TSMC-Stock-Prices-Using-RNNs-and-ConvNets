@@ -22,14 +22,10 @@ def lstm_prediction():
 
 
     y_test_pred_scaled = best_model.predict(X_test)
-    y_test_pred = best_model.inverse_transform(y_test_pred_scaled)
-    y_test_true = best_model.inverse_transform(y_test)
+    y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
+    y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
-    mae_test_percent = (mae_test_dollar / Average_price) * 100
-
-
-    print(f"Test MAE in Dollars: ${mae_test_dollar:.2f}")
-    print(f"Test MAE in Percentage: {mae_test_percent:.3f}%")
+    
 
 
 
@@ -37,6 +33,7 @@ def lstm_prediction():
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
+    mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
 
 
