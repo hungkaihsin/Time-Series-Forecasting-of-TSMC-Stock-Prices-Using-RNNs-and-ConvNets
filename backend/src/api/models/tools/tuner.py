@@ -37,11 +37,7 @@ def lstm_tuner(log_dir='backend/src/dataset/tuning', project_name='lstm'):
 
     best_parameter = tuner.get_best_hyperparameters(num_trials=1)[0]
 
-    print('Best Hyper tuning for LSTM:')
-    print(f"LSTM units: {best_parameter.get('lstm_units')}")
-    print(f"Dense units: {best_parameter.get('dense_units')}")
-    print(f"Optimizer: {best_parameter.get('optimizer')}")
-    print(f"Learning rate: {best_parameter.get('lr')}")
 
+    best_model = tuner.get_best_models(num_models=1)[0]
 
-    return tuner
+    return best_model
