@@ -4,7 +4,7 @@ from sklearn.metrics import mean_absolute_error
 
 
 # Import data
-data = preprocess_dataset(r'backend\src\dataset\TSM_data.csv')
+data = preprocess_dataset(r'src/dataset/TSM_data.csv')
 X_val, y_val = data['X_val'], data['y_val']
 X_test, y_test = data['X_test'], data['y_test']
 scaler = data['target_scaler']
