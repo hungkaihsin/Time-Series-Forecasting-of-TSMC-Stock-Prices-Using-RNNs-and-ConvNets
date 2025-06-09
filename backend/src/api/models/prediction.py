@@ -1,10 +1,11 @@
 from src.api.models.tools.tuner import lstm_tuner, gru_tuner, conv1d_tuner, ffn_model_tuner
+from src.api.models.tools.general import get_filepath
 from src.api.models.preprocess import preprocess_dataset
 from sklearn.metrics import mean_absolute_error
 
 
 # Import data
-data = preprocess_dataset(r'backend/src/dataset/TSM_data.csv')
+data = preprocess_dataset(get_filepath())
 X_val, y_val = data['X_val'], data['y_val']
 X_test, y_test = data['X_test'], data['y_test']
 scaler = data['target_scaler']
@@ -13,8 +14,6 @@ df = data['df']
 
 
 def lstm_prediction():
-
-
 
 
     best_model = lstm_tuner()

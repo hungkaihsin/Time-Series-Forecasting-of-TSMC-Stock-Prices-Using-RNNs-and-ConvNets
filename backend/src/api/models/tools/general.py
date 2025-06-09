@@ -8,3 +8,7 @@ def download(company, start, end):
     return f"{company}_data.csv"
 
 
+# file path
+def get_filepath():
+    return "backend/src/dataset/TSM_data.csv"
+    

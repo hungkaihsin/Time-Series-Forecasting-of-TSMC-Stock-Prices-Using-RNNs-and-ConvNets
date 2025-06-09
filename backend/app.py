@@ -5,6 +5,5 @@ from src.api.models.tools.plot import plot
 # plot(lstm_prediction())
 plot(lstm_prediction())
 plot(ffn_prediction())
-
 plot(gru_prediction())
 plot(conv1d_prediction())
