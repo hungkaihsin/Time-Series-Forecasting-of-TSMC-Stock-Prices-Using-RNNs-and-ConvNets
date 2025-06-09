@@ -11,11 +11,11 @@ def early_stop():
     return early_stop
 
 
-def lstm_tuner(log_dir='src/dataset/tuning', project_name='lstm'):
+def lstm_tuner(log_dir='backend/src/dataset/tuning', project_name='lstm'):
     
     # Can change this to allow user choose another file
 
-    data = preprocess_dataset(r'src/dataset/TSM_data.csv')
+    data = preprocess_dataset(r'backend/src/dataset/TSM_data.csv')
 
     X_train, y_train = data['X_train'], data['y_train']
     X_val, y_val = data['X_val'], data['y_val']
@@ -40,11 +40,11 @@ def lstm_tuner(log_dir='src/dataset/tuning', project_name='lstm'):
 
 
 
-def gru_tuner(log_dir='src/dataset/tuning', project_name='gru'):
+def gru_tuner(log_dir='backend/src/dataset/tuning', project_name='gru'):
     
     # Can change this to allow user choose another file
 
-    data = preprocess_dataset(r'src/dataset/TSM_data.csv')
+    data = preprocess_dataset(r'backend/src/dataset/TSM_data.csv')
 
     X_train, y_train = data['X_train'], data['y_train']
     X_val, y_val = data['X_val'], data['y_val']
@@ -68,11 +68,11 @@ def gru_tuner(log_dir='src/dataset/tuning', project_name='gru'):
 
 
 
-def conv1d_tuner(log_dir='src/dataset/tuning', project_name='conv1d'):
+def conv1d_tuner(log_dir='backend/src/dataset/tuning', project_name='conv1d'):
     
     # Can change this to allow user choose another file
 
-    data = preprocess_dataset(r'src/dataset/TSM_data.csv')
+    data = preprocess_dataset(r'backend/src/dataset/TSM_data.csv')
 
     X_train, y_train = data['X_train'], data['y_train']
     X_val, y_val = data['X_val'], data['y_val']
@@ -98,11 +98,11 @@ def conv1d_tuner(log_dir='src/dataset/tuning', project_name='conv1d'):
 
 
 
-def ffn_model_tuner(log_dir='src/dataset/tuning', project_name='ffn_model'):
+def ffn_model_tuner(log_dir='backend/src/dataset/tuning', project_name='ffn_model'):
     
     # Can change this to allow user choose another file
 
-    data = preprocess_dataset(r'src/dataset/TSM_data.csv')
+    data = preprocess_dataset(r'backend/src/dataset/TSM_data.csv')
 
     X_train, y_train = data['X_train'], data['y_train']
     X_val, y_val = data['X_val'], data['y_val']
