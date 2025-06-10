@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_cors import CORS
 from src.api.routes.prediction_routes import prediction_bp
 
@@ -8,6 +8,5 @@ CORS(app)
 app.register_blueprint(prediction_bp)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
