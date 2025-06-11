@@ -1,4 +1,3 @@
-// src/PredictionPage.jsx
 import React, { useState } from 'react'
 import Plot from 'react-plotly.js'
 import axios from 'axios'
@@ -24,7 +23,15 @@ export default function PredictionPage() {
         { model },
         { headers: { 'Content-Type': 'application/json' } }
       )
-      setResult(res.data)
+      // flatten any array that may accidentally come in as 2D
+      const flatten = arr => arr.flat()
+      setResult({
+        ...res.data,
+        y_val_true: flatten(res.data.y_val_true),
+        y_val_pred: flatten(res.data.y_val_pred),
+        y_test_true: flatten(res.data.y_test_true),
+        y_test_pred: flatten(res.data.y_test_pred),
+      })
     } catch (err) {
       console.error('Prediction error:', err)
       alert('Something went wrong – check the console.')
@@ -85,7 +92,7 @@ export default function PredictionPage() {
               ]}
               layout={{
                 title: `Validation Comparison<br>MAE: $${result.mae_val_dollar.toFixed(2)} (${result.mae_val_percentage.toFixed(2)}%)`,
-                xaxis: { title: 'Date' },
+                xaxis: { title: 'Date', type: 'date'},
                 yaxis: { title: 'Price' },
                 margin: { t: 40, l: 50, r: 20, b: 40 },
                 plot_bgcolor: 'white',
@@ -102,7 +109,7 @@ export default function PredictionPage() {
               ]}
               layout={{
                 title: `Test Comparison<br>MAE: $${result.mae_test_dollar.toFixed(2)} (${result.mae_test_percent.toFixed(2)}%)`,
-                xaxis: { title: 'Date' },
+                xaxis: { title: 'Date', type: 'date'},
                 yaxis: { title: 'Price' },
                 margin: { t: 40, l: 50, r: 20, b: 40 },
                 plot_bgcolor: 'white',
@@ -111,26 +118,6 @@ export default function PredictionPage() {
               style={{ width: '100%', height: '300px' }}
               useResizeHandler
             />
-          </div>
-
-          <div className="analysis">
-            <h3>Quick Analysis</h3>
-            <p>
-              On the validation set, the model’s predictions deviate by an average of
-              <strong> ${result.mae_val_dollar.toFixed(2)}</strong> ({result.mae_val_percentage.toFixed(2)}%). 
-              On the held-out test set, the error is
-              <strong> ${result.mae_test_dollar.toFixed(2)}</strong> ({result.mae_test_percent.toFixed(2)}%).
-            </p>
-            {result.mae_test_dollar > result.mae_val_dollar * 1.1 ? (
-              <p>
-                The higher test MAE suggests a bit of overfitting—consider more training data
-                or stronger regularization.
-              </p>
-            ) : (
-              <p>
-                The similar validation/test errors imply your model generalizes well!
-              </p>
-            )}
           </div>
         </div>
       )}

@@ -3,6 +3,7 @@ from src.api.models.tools.general import get_filepath
 from src.api.models.preprocess import preprocess_dataset
 from sklearn.metrics import mean_absolute_error
 import numpy as np
+import pandas as pd
 
 
 # Import data
@@ -11,16 +12,16 @@ X_val, y_val = data['X_val'], data['y_val']
 X_test, y_test = data['X_test'], data['y_test']
 scaler = data['target_scaler']
 df = data['df']
-
+df['Price'] = pd.to_datetime(df['Price'])
 
 # covert to allow flask app to fetch
 def convert_to_serializable(obj):
     """Convert numpy arrays and other non-serializable objects to lists"""
     if isinstance(obj, np.ndarray):
-        return obj.tolist()
-    elif isinstance(obj, np.float64) or isinstance(obj, np.float32):
+        return obj.flatten().tolist()  # <-- Flatten it here
+    elif isinstance(obj, (np.float64, np.float32)):
         return float(obj)
-    elif isinstance(obj, np.int64) or isinstance(obj, np.int32):
+    elif isinstance(obj, (np.int64, np.int32)):
         return int(obj)
     return obj
 
@@ -48,8 +49,8 @@ def lstm_prediction():
     # for plotting
     val_start_index = data["train_size"] + 21
     test_start_index = data["train_size"] + data["val_size"] + 21
-    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
-    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].dt.strftime('%Y-%m-%d').tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].dt.strftime('%Y-%m-%d').tolist()
 
     # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
@@ -95,8 +96,8 @@ def gru_prediction():
     # for plotting
     val_start_index = data["train_size"] + 21
     test_start_index = data["train_size"] + data["val_size"] + 21
-    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
-    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].dt.strftime('%Y-%m-%d').tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].dt.strftime('%Y-%m-%d').tolist()
 
     # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
@@ -142,8 +143,8 @@ def conv1d_prediction():
     # for plotting
     val_start_index = data["train_size"] + 21
     test_start_index = data["train_size"] + data["val_size"] + 21
-    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
-    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].dt.strftime('%Y-%m-%d').tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].dt.strftime('%Y-%m-%d').tolist()
 
     # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
@@ -190,8 +191,8 @@ def ffn_prediction():
     
     val_start_index = data["train_size"] + 21
     test_start_index = data["train_size"] + data["val_size"] + 21
-    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
-    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].dt.strftime('%Y-%m-%d').tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].dt.strftime('%Y-%m-%d').tolist()
 
     
 
