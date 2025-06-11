@@ -22,6 +22,7 @@ def predict():
         result = ffn_prediction()
     else:
         return jsonify({"error": "Invalid model name"}), 400
+    
 
     return jsonify(result)
         

@@ -2,6 +2,7 @@ from src.api.models.tools.tuner import lstm_tuner, gru_tuner, conv1d_tuner, ffn_
 from src.api.models.tools.general import get_filepath
 from src.api.models.preprocess import preprocess_dataset
 from sklearn.metrics import mean_absolute_error
+import numpy as np
 
 
 # Import data
@@ -12,10 +13,19 @@ scaler = data['target_scaler']
 df = data['df']
 
 
+# covert to allow flask app to fetch
+def convert_to_serializable(obj):
+    """Convert numpy arrays and other non-serializable objects to lists"""
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, np.float64) or isinstance(obj, np.float32):
+        return float(obj)
+    elif isinstance(obj, np.int64) or isinstance(obj, np.int32):
+        return int(obj)
+    return obj
+
 
 def lstm_prediction():
-
-
     best_model = lstm_tuner()
 
     y_val_pred_scaled = best_model.predict(X_val)
@@ -23,40 +33,45 @@ def lstm_prediction():
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-
     y_test_pred_scaled = best_model.predict(X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
     
-
     # Need to make sure the dataset contains the same column name
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
     mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
+    
+    # for plotting
+    val_start_index = data["train_size"] + 21
+    test_start_index = data["train_size"] + data["val_size"] + 21
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
 
-    # Export  result
+    # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
-        'mae_val_dollar': mae_val_dollar,
-        'mae_val_percentage': mae_val_percentage,
-        'mae_test_dollar': mae_test_dollar,
-        'mae_test_percent': mae_test_percent,
-        'y_val_true': y_val_true,
-        'y_val_pred': y_val_pred,
-        'y_test_pred': y_test_pred,
-        'y_test_true': y_test_true,
-        'df': df,
-        'train_size': data["train_size"],
-        'val_size': data["val_size"]
+        'mae_val_dollar': float(mae_val_dollar),
+        'mae_val_percentage': float(mae_val_percentage),
+        'mae_test_dollar': float(mae_test_dollar),
+        'mae_test_percent': float(mae_test_percent),
+        'y_val_true': convert_to_serializable(y_val_true),
+        'y_val_pred': convert_to_serializable(y_val_pred),
+        'y_test_pred': convert_to_serializable(y_test_pred),
+        'y_test_true': convert_to_serializable(y_test_true),
+        'df': df.to_dict(orient='records'),  # Convert DataFrame to list of dictionaries
+        'train_size': int(data["train_size"]),
+        'val_size': int(data["val_size"]),
+        "val_dates": val_dates,
+        "test_dates": test_dates,
     }
 
     return result
 
 
 def gru_prediction():
-
     best_model = gru_tuner()
 
     y_val_pred_scaled = best_model.predict(X_val)
@@ -64,44 +79,46 @@ def gru_prediction():
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-
-
     y_test_pred_scaled = best_model.predict(X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
     
-
     # Need to make sure the dataset contains the same column name
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
     mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
+    
+    
+    # for plotting
+    val_start_index = data["train_size"] + 21
+    test_start_index = data["train_size"] + data["val_size"] + 21
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
 
-
-    # Export  result
+    # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
-        'mae_val_dollar': mae_val_dollar,
-        'mae_val_percentage': mae_val_percentage,
-        'mae_test_dollar': mae_test_dollar,
-        'mae_test_percent': mae_test_percent,
-        'y_val_true': y_val_true,
-        'y_val_pred': y_val_pred,
-        'y_test_pred': y_test_pred,
-        'y_test_true': y_test_true,
-        'df': df,
-        'train_size': data["train_size"],
-        'val_size': data["val_size"]
+        'mae_val_dollar': float(mae_val_dollar),
+        'mae_val_percentage': float(mae_val_percentage),
+        'mae_test_dollar': float(mae_test_dollar),
+        'mae_test_percent': float(mae_test_percent),
+        'y_val_true': convert_to_serializable(y_val_true),
+        'y_val_pred': convert_to_serializable(y_val_pred),
+        'y_test_pred': convert_to_serializable(y_test_pred),
+        'y_test_true': convert_to_serializable(y_test_true),
+        'df': df.to_dict(orient='records'),  # Convert DataFrame to list of dictionaries
+        'train_size': int(data["train_size"]),
+        'val_size': int(data["val_size"]),
+        "val_dates": val_dates,
+        "test_dates": test_dates,
     }
 
     return result
 
 
-
 def conv1d_prediction():
-
-
     best_model = conv1d_tuner()
 
     y_val_pred_scaled = best_model.predict(X_val)
@@ -109,46 +126,46 @@ def conv1d_prediction():
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-
-
     y_test_pred_scaled = best_model.predict(X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
     
-
     # Need to make sure the dataset contains the same column name
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
     mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
+    
+    
+    # for plotting
+    val_start_index = data["train_size"] + 21
+    test_start_index = data["train_size"] + data["val_size"] + 21
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
 
-
-    # Export  result
+    # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
-        'mae_val_dollar': mae_val_dollar,
-        'mae_val_percentage': mae_val_percentage,
-        'mae_test_dollar': mae_test_dollar,
-        'mae_test_percent': mae_test_percent,
-        'y_val_true': y_val_true,
-        'y_val_pred': y_val_pred,
-        'y_test_pred': y_test_pred,
-        'y_test_true': y_test_true,
-        'df': df,
-        'train_size': data["train_size"],
-        'val_size': data["val_size"]
+        'mae_val_dollar': float(mae_val_dollar),
+        'mae_val_percentage': float(mae_val_percentage),
+        'mae_test_dollar': float(mae_test_dollar),
+        'mae_test_percent': float(mae_test_percent),
+        'y_val_true': convert_to_serializable(y_val_true),
+        'y_val_pred': convert_to_serializable(y_val_pred),
+        'y_test_pred': convert_to_serializable(y_test_pred),
+        'y_test_true': convert_to_serializable(y_test_true),
+        'df': df.to_dict(orient='records'),  # Convert DataFrame to list of dictionaries
+        'train_size': int(data["train_size"]),
+        'val_size': int(data["val_size"]),
+        "val_dates": val_dates,
+        "test_dates": test_dates,
     }
 
     return result
 
 
-
-
-
 def ffn_prediction():
-
-
     best_model = ffn_model_tuner()
     X_val_ff = X_val.reshape(X_val.shape[0], -1)
     X_test_ff = X_test.reshape(X_test.shape[0], -1)
@@ -158,37 +175,41 @@ def ffn_prediction():
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-
-
     y_test_pred_scaled = best_model.predict(X_test_ff)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
     
-
-
-
     # Need to make sure the dataset contains the same column name
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
     mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
+    
+    
+    val_start_index = data["train_size"] + 21
+    test_start_index = data["train_size"] + data["val_size"] + 21
+    val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].tolist()
+    test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].tolist()
 
+    
 
-    # Export  result
+    # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
-        'mae_val_dollar': mae_val_dollar,
-        'mae_val_percentage': mae_val_percentage,
-        'mae_test_dollar': mae_test_dollar,
-        'mae_test_percent': mae_test_percent,
-        'y_val_true': y_val_true,
-        'y_val_pred': y_val_pred,
-        'y_test_pred': y_test_pred,
-        'y_test_true': y_test_true,
-        'df': df,
-        'train_size': data["train_size"],
-        'val_size': data["val_size"]
+        'mae_val_dollar': float(mae_val_dollar),
+        'mae_val_percentage': float(mae_val_percentage),
+        'mae_test_dollar': float(mae_test_dollar),
+        'mae_test_percent': float(mae_test_percent),
+        'y_val_true': convert_to_serializable(y_val_true),
+        'y_val_pred': convert_to_serializable(y_val_pred),
+        'y_test_pred': convert_to_serializable(y_test_pred),
+        'y_test_true': convert_to_serializable(y_test_true),
+        'df': df.to_dict(orient='records'),  # Convert DataFrame to list of dictionaries
+        'train_size': int(data["train_size"]),
+        'val_size': int(data["val_size"]),
+        "val_dates": val_dates,
+        "test_dates": test_dates,
     }
 
     return result

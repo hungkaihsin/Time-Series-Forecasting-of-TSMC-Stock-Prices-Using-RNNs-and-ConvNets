@@ -8,7 +8,7 @@ from keras_tuner import RandomSearch
 
 
 
-log_dir_path = 'backend/src/dataset/tuning'
+log_dir_path = 'src/dataset/tuning'
 
 def early_stop():
     early_stop = EarlyStopping(patience=10, restore_best_weights=True)

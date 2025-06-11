@@ -10,5 +10,5 @@ def download(company, start, end):
 
 # file path
 def get_filepath():
-    return "backend/src/dataset/TSM_data.csv"
+    return "src/dataset/TSM_data.csv"
     
