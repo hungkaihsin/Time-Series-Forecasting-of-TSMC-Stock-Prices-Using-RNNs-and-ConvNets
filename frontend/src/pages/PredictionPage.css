@@ -101,13 +101,13 @@
   animation: fadeIn 0.6s ease forwards;
 }
 
-.analysis-section {
+/* .analysis-section {
   background: #f5f5f5;
   border-radius: 1rem;
   padding: 1.5rem;
   margin-top: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .model-analysis h4 {
   margin-bottom: 0.5rem;
@@ -131,6 +131,7 @@
   border-radius: 1rem;
   padding: 1rem 1.5rem;
   margin-top: 1.5rem;
+  text-align: left;
 }
 
 .model-analysis summary {

@@ -10,41 +10,41 @@ const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 const modelInsights = {
   lstm: (
     <details className="model-analysis">
-      <summary><strong>📘 1. LSTM - Analysis</strong></summary>
+      <summary><strong>LSTM - Analysis</strong></summary>
       <ul>
-        <li><strong>Shows solid performance on the validation set.</strong></li>
-        <li><strong>However, it generalizes poorly on the test set, with the highest test error among all models.</strong></li>
-        <li><strong>Visuals reveal a moderate fit, but it occasionally lags during sudden price movements.</strong></li>
+        <li>Shows solid performance on the validation set.</li>
+        <li>However, it generalizes poorly on the test set, with the highest test error among all models.</li>
+        <li>Visuals reveal a moderate fit, but it occasionally lags during sudden price movements.</li>
       </ul>
     </details>
   ),
   gru: (
     <details className="model-analysis">
-      <summary><strong>📘 2. GRU - Analysis</strong></summary>
+      <summary><strong>GRU - Analysis</strong></summary>
       <ul>
-        <li><strong>Nearly identical validation performance to LSTM.</strong></li>
-        <li><strong>Better generalization on the test set with significantly lower MAE.</strong></li>
-        <li><strong>Prediction curves align closely with true prices, showing robust modeling of price trends.</strong></li>
+        <li>Nearly identical validation performance to LSTM.</li>
+        <li>Better generalization on the test set with significantly lower MAE.</li>
+        <li>Prediction curves align closely with true prices, showing robust modeling of price trends.</li>
       </ul>
     </details>
   ),
   conv1d: (
     <details className="model-analysis">
-      <summary><strong>🌊 3. Conv1D - Analysis</strong></summary>
+      <summary><strong>Conv1D - Analysis</strong></summary>
       <ul>
-        <li><strong>This model has the worst performance in both validation and test phases.</strong></li>
-        <li><strong>Predictions are overly smoothed and miss sharper transitions.</strong></li>
-        <li><strong>Indicates that Conv1D might not capture long-term dependencies well with current settings.</strong></li>
+        <li>This model has the worst performance in both validation and test phases.</li>
+        <li>Predictions are overly smoothed and miss sharper transitions.</li>
+        <li>Indicates that Conv1D might not capture long-term dependencies well with current settings.</li>
       </ul>
     </details>
   ),
   ffn: (
     <details className="model-analysis">
-      <summary><strong>🧠 4. Feedforward Neural Network (FFN) - Analysis</strong></summary>
+      <summary><strong>Feedforward Neural Network (FFN) - Analysis</strong></summary>
       <ul>
-        <li><strong>Slightly worse validation MAE than LSTM/GRU, but comparable.</strong></li>
-        <li><strong>Best test MAE, narrowly beating GRU.</strong></li>
-        <li><strong>Visually, it aligns well with true values, suggesting it can be an efficient alternative with simpler architecture.</strong></li>
+        <li>Slightly worse validation MAE than LSTM/GRU, but comparable.</li>
+        <li>Best test MAE, narrowly beating GRU.</li>
+        <li>Visually, it aligns well with true values, suggesting it can be an efficient alternative with simpler architecture.</li>
       </ul>
     </details>
   )
