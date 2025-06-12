@@ -39,7 +39,11 @@ project-root/
 1. Set up virtual environment (optional but recommended):
 ```
 python -m venv .venv
-source .venv/bin/activate  # or `.venv\Scripts\activate` on Windows
+source .venv/bin/activate  
+```
+or 
+```
+.venv\Scripts\activate on Windows
 ```
 2. Install dependencies:
 ```
