@@ -13,6 +13,7 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
+   transition: all 0.3s ease;
 }
 
 .nav-buttons button {
@@ -27,6 +28,8 @@
 
 .nav-buttons button:hover {
   background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .controls {
@@ -86,4 +89,14 @@
 .plot-section h4 {
   margin-bottom: 0.5rem;
   font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prediction-page,
+.intro-page {
+  animation: fadeIn 0.6s ease forwards;
 }

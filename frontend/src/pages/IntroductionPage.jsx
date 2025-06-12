@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './IntroductionPage.css'
 
+
 export default function IntroductionPage() {
   const navigate = useNavigate()
   return (
