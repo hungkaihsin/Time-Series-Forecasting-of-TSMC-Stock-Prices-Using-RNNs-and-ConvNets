@@ -4,7 +4,7 @@
 ## Introduction
 This project predicts TSMC's next-day closing stock price using historical financial data from Yahoo Finance. It evaluates multiple deep learning models—including LSTM, GRU, Conv1D, and Feedforward Neural Networks (FFN)—to identify the most effective approach for forecasting. The final solution exposes the model via a Flask API and features a modern React-based front-end for interaction.
 
-**Live Demo**: [Visit the deployed site](https://time-series-forecasting-of-tsmc-stock-3z6u.onrender.com/) <!-- Replace with your actual Render URL -->
+<strong>Live Demo</strong>: <a href="https://time-series-forecasting-of-tsmc-stock-3z6u.onrender.com/" target="_blank" rel="noopener noreferrer">Visit the deployed site</a>
 
 ## Features
 
