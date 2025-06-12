@@ -1,26 +1,27 @@
 .intro-page {
-  max-width: 1000px;
-  margin: 2rem auto;
+  max-width: 800px;
+  margin: 3rem auto;
   padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #e6e0e0;
+  background-color: #e5dfdf;
+  font-family: 'Inter', sans-serif;
+  color: #111;
   border-radius: 1rem;
-  color: #222;
-}
+  text-align: center;}
+
 
 .nav-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 2rem;
    transition: all 0.3s ease;
 }
 
 .nav-buttons button {
-  padding: 0.5rem 1.2rem;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
   cursor: pointer;
   background-color: white;
   color: #222; /* Add this line */
@@ -39,9 +40,28 @@ h2 {
   font-weight: 600;
 }
 
-section {
-  margin-bottom: 1.5rem;
+.section {
+  margin-bottom: 2rem;
+  text-align: left;
 }
+
+
+.section h3 {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.section p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.section ul {
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.8;
+}
+
 
 pre {
   background: #f5f5f5;
@@ -63,4 +83,10 @@ ul {
 .prediction-page,
 .intro-page {
   animation: fadeIn 0.6s ease forwards;
+}
+
+.page-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 }
