@@ -24,21 +24,21 @@ export default function IntroductionPage() {
 
       <section className="section">
         <ul>
-          <li>- Data preprocessing and sequence generation for neural networks</li>
-          <li>- Hyperparameter tuning for Feedforward, LSTM, GRU and Conv1D models</li>
-          <li>- REST endpoints to trigger predictions</li>
-          <li>- Modern React interface for interacting with the API</li>
+          <li>• Data preprocessing and sequence generation for neural networks</li>
+          <li>• Hyperparameter tuning for Feedforward, LSTM, GRU and Conv1D models</li>
+          <li>• REST endpoints to trigger predictions</li>
+          <li>• Modern React interface for interacting with the API</li>
         </ul>
       </section>
 
       <section className="section">
-        <h3>🏁 Conclusion</h3>
+        <h3>Conclusion: </h3>
         <table className="conclusion-table">
           <thead>
             <tr>
               <th>Model</th>
-              <th>Val MAE ($ / %)</th>
-              <th>Test MAE ($ / %)</th>
+              <th>Val MAE ($/%)</th>
+              <th>Test MAE ($/%)</th>
               <th>Comment</th>
             </tr>
           </thead>
@@ -47,25 +47,25 @@ export default function IntroductionPage() {
               <td><strong>LSTM</strong></td>
               <td>1.40 (0.73%)</td>
               <td>6.56 (3.40%)</td>
-              <td>Strong in training but overfits</td>
+              <td><span className="tag tag-warning">Overfits</span> despite strong training</td>
             </tr>
             <tr>
               <td><strong>GRU</strong></td>
               <td>1.40 (0.72%)</td>
               <td>4.27 (2.21%)</td>
-              <td>Good balance between fit and generalization</td>
+              <td><span className="tag tag-good">Balanced</span> fit and generalization</td>
             </tr>
             <tr>
               <td><strong>Conv1D</strong></td>
               <td>2.81 (1.46%)</td>
               <td>8.81 (4.56%)</td>
-              <td>Underperforms on both sets</td>
+              <td><span className="tag tag-bad">Underperforms</span> on both sets</td>
             </tr>
             <tr>
               <td><strong>FFN</strong></td>
               <td>1.66 (0.86%)</td>
               <td>4.24 (2.19%)</td>
-              <td><strong>Best generalization</strong> performance</td>
+              <td><span className="tag tag-best">Best generalization</span> performance</td>
             </tr>
           </tbody>
         </table>

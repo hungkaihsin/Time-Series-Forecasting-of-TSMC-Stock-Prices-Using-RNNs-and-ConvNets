@@ -150,3 +150,28 @@
 .model-analysis li {
   margin-bottom: 0.6rem;
 }
+
+
+.tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: white;
+}
+
+.tag-warning {
+  background-color: #f39c12;
+}
+
+.tag-good {
+  background-color: #27ae60;
+}
+
+.tag-bad {
+  background-color: #e74c3c;
+}
+
+.tag-best {
+  background-color: #9b59b6;
+}
