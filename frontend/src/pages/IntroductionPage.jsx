@@ -17,8 +17,7 @@ export default function IntroductionPage() {
       <section className="section">
         <h3>Introduction:</h3>
         <p>
-          This project predicts TSMC's next day closing price using a variety of deep learning models.
-          The best performing model can be queried through a Flask API and a small React front-end.
+          This project forecasts TSMC’s next-day closing stock price using historical financial data obtained from Yahoo Finance. A range of deep learning models—including LSTM, GRU, Conv1D, and feedforward networks—were explored to identify the most accurate predictor. The best-performing model can be accessed via a Flask API and visualized through a React-based front-end.
         </p>
       </section>
 
