@@ -71,7 +71,7 @@ cd frontend
 ```
 npm install
 ```
-Note: Need to install Node before hand
+Note: need to install Node before hand
 
 3.	Run the development server:
 ```
