@@ -1,0 +1,154 @@
+.intro-page {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #e5dfdf;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  border-radius: 1rem;
+  text-align: center;}
+
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+   transition: all 0.3s ease;
+}
+
+.nav-buttons button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: white;
+  color: #222; /* Add this line */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-buttons button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.section {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+
+.section h3 {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.section p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.section ul {
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.8;
+}
+
+
+pre {
+  background: #f5f5f5;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+ul {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prediction-page,
+.intro-page {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.page-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+
+}
+
+.conclusion-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.6rem; /* adds vertical spacing between rows */
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.conclusion-table th {
+  background-color: transparent;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.5rem;
+  text-align: left;
+  color: #333;
+}
+
+.conclusion-table td {
+  background-color: #f6f4f4;
+  padding: 0.6rem 0.5rem;
+  border-radius: 0.5rem;
+  vertical-align: top;
+  font-size: 0.95rem;
+}
+
+.conclusion-table tr td:first-child {
+  font-weight: 600;
+}
+
+.recommendation {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+.tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  margin-right: 0.3rem;
+}
+
+.tag-warning {
+  background-color: #f39c12;
+}
+
+.tag-good {
+  background-color: #27ae60;
+}
+
+.tag-bad {
+  background-color: #e74c3c;
+}
+
+.tag-best {
+  background-color: #9b59b6;
+}
