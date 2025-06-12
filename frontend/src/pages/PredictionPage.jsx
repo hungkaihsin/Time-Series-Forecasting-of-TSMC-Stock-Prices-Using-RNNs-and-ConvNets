@@ -1,3 +1,4 @@
+// src/pages/PredictionPage.jsx
 import React, { useState } from 'react'
 import Plot from 'react-plotly.js'
 import axios from 'axios'
@@ -77,8 +78,7 @@ export default function PredictionPage() {
                   xaxis: { title: 'Date', type: 'date' },
                   yaxis: { title: 'Price' },
                   margin: { t: 20, l: 40, r: 20, b: 40 },
-                  plot_bgcolor: 'white', paper_bgcolor: 'white'
-                }}
+                  plot_bgcolor: 'white', paper_bgcolor: 'white' }}
                 style={{ width: '100%', height: '250px' }}
               />
             </div>
@@ -91,8 +91,7 @@ export default function PredictionPage() {
                   xaxis: { title: 'Date', type: 'date' },
                   yaxis: { title: 'Price' },
                   margin: { t: 20, l: 40, r: 20, b: 40 },
-                  plot_bgcolor: 'white', paper_bgcolor: 'white'
-                }}
+                  plot_bgcolor: 'white', paper_bgcolor: 'white' }}
                 style={{ width: '100%', height: '250px' }}
               />
             </div>
