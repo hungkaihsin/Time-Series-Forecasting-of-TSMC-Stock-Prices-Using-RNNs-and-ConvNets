@@ -7,44 +7,44 @@ import './PredictionPage.css'
 
 const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 
-const modelInsights = {
-  lstm: (
-    <details className="model-analysis">
-      <summary><strong>LSTM - Analysis</strong></summary>
+function AnalysisAccordion({ selectedModel }) {
+  const insights = {
+    lstm: [
+      "Shows solid performance on the validation set.",
+      "However, it generalizes poorly on the test set, with the highest test error among all models.",
+      "Visuals reveal a moderate fit, but it occasionally lags during sudden price movements."
+    ],
+    gru: [
+      "Nearly identical validation performance to LSTM.",
+      "Better generalization on the test set with significantly lower MAE.",
+      "Prediction curves align closely with true prices, showing robust modeling of price trends."
+    ],
+    conv1d: [
+      "This model has the worst performance in both validation and test phases.",
+      "Predictions are overly smoothed and miss sharper transitions.",
+      "Indicates that Conv1D might not capture long-term dependencies well with current settings."
+    ],
+    ffn: [
+      "Slightly worse validation MAE than LSTM/GRU, but comparable.",
+      "Best test MAE, narrowly beating GRU.",
+      "Visually, it aligns well with true values, suggesting it can be an efficient alternative with simpler architecture."
+    ]
+  }
+
+  const titleMap = {
+    lstm: "LSTM - Analysis",
+    gru: "GRU - Analysis",
+    conv1d: "Conv1D - Analysis",
+    ffn: "FFN - Analysis"
+  }
+
+  return (
+    <details className="model-analysis" open>
+      <summary>{titleMap[selectedModel]}</summary>
       <ul>
-        <li>Shows solid performance on the validation set.</li>
-        <li>However, it generalizes poorly on the test set, with the highest test error among all models.</li>
-        <li>Visuals reveal a moderate fit, but it occasionally lags during sudden price movements.</li>
-      </ul>
-    </details>
-  ),
-  gru: (
-    <details className="model-analysis">
-      <summary><strong>GRU - Analysis</strong></summary>
-      <ul>
-        <li>Nearly identical validation performance to LSTM.</li>
-        <li>Better generalization on the test set with significantly lower MAE.</li>
-        <li>Prediction curves align closely with true prices, showing robust modeling of price trends.</li>
-      </ul>
-    </details>
-  ),
-  conv1d: (
-    <details className="model-analysis">
-      <summary><strong>Conv1D - Analysis</strong></summary>
-      <ul>
-        <li>This model has the worst performance in both validation and test phases.</li>
-        <li>Predictions are overly smoothed and miss sharper transitions.</li>
-        <li>Indicates that Conv1D might not capture long-term dependencies well with current settings.</li>
-      </ul>
-    </details>
-  ),
-  ffn: (
-    <details className="model-analysis">
-      <summary><strong>Feedforward Neural Network (FFN) - Analysis</strong></summary>
-      <ul>
-        <li>Slightly worse validation MAE than LSTM/GRU, but comparable.</li>
-        <li>Best test MAE, narrowly beating GRU.</li>
-        <li>Visually, it aligns well with true values, suggesting it can be an efficient alternative with simpler architecture.</li>
+        {insights[selectedModel].map((item, idx) => (
+          <li key={idx}><strong>{item}</strong></li>
+        ))}
       </ul>
     </details>
   )
@@ -141,7 +141,7 @@ export default function PredictionPage() {
           </div>
 
           <div className="analysis-section">
-            {modelInsights[model]}
+            <AnalysisAccordion selectedModel={model} />
           </div>
         </div>
       )}
