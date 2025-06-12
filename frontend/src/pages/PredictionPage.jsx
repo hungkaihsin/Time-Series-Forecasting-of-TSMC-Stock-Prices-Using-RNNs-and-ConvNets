@@ -7,6 +7,61 @@ import './PredictionPage.css'
 
 const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 
+const modelInsights = {
+  lstm: (
+    <div className="model-analysis">
+      <h4>📘 1. LSTM</h4>
+      <p><strong>Validation MAE:</strong> $1.40 (0.73%)</p>
+      <p><strong>Test MAE:</strong> $6.56 (3.40%)</p>
+      <h5>Analysis:</h5>
+      <ul>
+        <li>Shows solid performance on the validation set.</li>
+        <li>However, it generalizes poorly on the test set, with the <strong>highest test error</strong> among all models.</li>
+        <li>Visuals reveal a moderate fit, but it occasionally lags during sudden price movements.</li>
+      </ul>
+    </div>
+  ),
+  gru: (
+    <div className="model-analysis">
+      <h4>📘 2. GRU</h4>
+      <p><strong>Validation MAE:</strong> $1.40 (0.72%)</p>
+      <p><strong>Test MAE:</strong> $4.27 (2.21%)</p>
+      <h5>Analysis:</h5>
+      <ul>
+        <li>Nearly identical validation performance to LSTM.</li>
+        <li><strong>Better generalization</strong> on the test set with significantly lower MAE.</li>
+        <li>Prediction curves align closely with true prices, showing robust modeling of price trends.</li>
+      </ul>
+    </div>
+  ),
+  conv1d: (
+    <div className="model-analysis">
+      <h4>🌊 3. Conv1D</h4>
+      <p><strong>Validation MAE:</strong> $2.81 (1.46%)</p>
+      <p><strong>Test MAE:</strong> $8.81 (4.56%)</p>
+      <h5>Analysis:</h5>
+      <ul>
+        <li>This model has the <strong>worst performance</strong> in both validation and test phases.</li>
+        <li>Predictions are overly smoothed and <strong>miss sharper transitions</strong>.</li>
+        <li>Indicates that Conv1D might not capture long-term dependencies well with current settings.</li>
+      </ul>
+    </div>
+  ),
+  ffn: (
+    <div className="model-analysis">
+      <h4>🧠 4. Feedforward Neural Network (FFN)</h4>
+      <p><strong>Validation MAE:</strong> $1.66 (0.86%)</p>
+      <p><strong>Test MAE:</strong> $4.24 (2.19%)</p>
+      <h5>Analysis:</h5>
+      <ul>
+        <li>Slightly worse validation MAE than LSTM/GRU, but comparable.</li>
+        <li><strong>Best test MAE</strong>, narrowly beating GRU.</li>
+        <li>Visually, it aligns well with true values and works efficiently with simpler architecture.</li>
+      </ul>
+    </div>
+  )
+}
+
 export default function PredictionPage() {
   const [model, setModel] = useState(MODELS[0])
   const [file, setFile] = useState(null)
@@ -95,6 +150,10 @@ export default function PredictionPage() {
                 style={{ width: '100%', height: '250px' }}
               />
             </div>
+          </div>
+
+          <div className="analysis-section">
+            {modelInsights[model]}
           </div>
         </div>
       )}
