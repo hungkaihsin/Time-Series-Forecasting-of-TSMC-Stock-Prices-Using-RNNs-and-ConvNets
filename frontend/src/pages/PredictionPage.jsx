@@ -43,7 +43,7 @@ function AnalysisAccordion({ selectedModel }) {
       <summary>{titleMap[selectedModel]}</summary>
       <ul>
         {insights[selectedModel].map((item, idx) => (
-          <li key={idx}><strong>{item}</strong></li>
+          <li key={idx}>{item}</li>
         ))}
       </ul>
     </details>

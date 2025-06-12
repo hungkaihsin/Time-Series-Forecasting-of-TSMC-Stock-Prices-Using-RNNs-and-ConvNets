@@ -24,10 +24,10 @@ export default function IntroductionPage() {
 
       <section className="section">
         <ul>
-          <li>• Data preprocessing and sequence generation for neural networks</li>
-          <li>• Hyperparameter tuning for Feedforward, LSTM, GRU and Conv1D models</li>
-          <li>• REST endpoints to trigger predictions</li>
-          <li>• Modern React interface for interacting with the API</li>
+          <li>• Data preprocessing and sequence generation for neural networks.</li>
+          <li>• Hyperparameter tuning for Feedforward, LSTM, GRU and Conv1D model.</li>
+          <li>• REST endpoints to trigger predictions.</li>
+          <li>• Modern React interface for interacting with the API.</li>
         </ul>
       </section>
 
@@ -70,7 +70,7 @@ export default function IntroductionPage() {
           </tbody>
         </table>
         <div className="recommendation">
-          <strong>🏆 Recommendation:</strong> The FFN and GRU models are most suitable for deployment, balancing training accuracy and real-world test performance.
+          <strong>Recommendation:</strong> The FFN and GRU models are most suitable for deployment, balancing training accuracy and real-world test performance.
         </div>
       </section>
     </div>

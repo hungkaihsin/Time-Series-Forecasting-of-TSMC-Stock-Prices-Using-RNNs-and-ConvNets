@@ -87,6 +87,68 @@ ul {
 
 .page-title {
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 2rem;
+
+}
+
+.conclusion-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.6rem; /* adds vertical spacing between rows */
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.conclusion-table th {
+  background-color: transparent;
+  font-size: 0.95rem;
+  padding: 0.6rem 0.5rem;
+  text-align: left;
+  color: #333;
+}
+
+.conclusion-table td {
+  background-color: #f6f4f4;
+  padding: 0.6rem 0.5rem;
+  border-radius: 0.5rem;
+  vertical-align: top;
+  font-size: 0.95rem;
+}
+
+.conclusion-table tr td:first-child {
+  font-weight: 600;
+}
+
+.recommendation {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+.tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  margin-right: 0.3rem;
+}
+
+.tag-warning {
+  background-color: #f39c12;
+}
+
+.tag-good {
+  background-color: #27ae60;
+}
+
+.tag-bad {
+  background-color: #e74c3c;
+}
+
+.tag-best {
+  background-color: #9b59b6;
 }

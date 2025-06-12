@@ -89,6 +89,7 @@
 .plot-section h4 {
   margin-bottom: 0.5rem;
   font-weight: 600;
+  text-align: left;
 }
 
 @keyframes fadeIn {
