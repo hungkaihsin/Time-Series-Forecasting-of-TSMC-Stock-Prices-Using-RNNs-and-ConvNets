@@ -1,78 +1,178 @@
-/* src/PredictionPage.css */
-
 .prediction-page {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2rem auto;
-  padding: 1rem;
-  font-family: sans-serif;
-  color: #333;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background-color: #e6e0e0;
+  border-radius: 1rem;
 }
 
-.prediction-page h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+   transition: all 0.3s ease;
+}
+
+.nav-buttons button {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-buttons button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .controls label {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-.controls select,
-.controls input[type="file"] {
-  margin-top: 0.3rem;
+.controls select {
+  margin-left: 0.5rem;
   padding: 0.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
 }
 
-.controls button {
-  background: #0070f3;
-  color: white;
+.predict-btn {
+  background-color: #f6c800;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
   border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 4px;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.controls button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.results {
-  background: #fafafa;
-  border-radius: 6px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.predict-btn:hover {
+  background-color: #ffd500;
 }
 
 .metrics {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .plots {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.analysis h3 {
+.plot-section {
+  background-color: #dedcdc;
+  border-radius: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.plot-section h4 {
   margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: left;
 }
 
-.analysis p {
-  margin: 0.4rem 0;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prediction-page,
+.intro-page {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* .analysis-section {
+  background: #f5f5f5;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.model-analysis h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.model-analysis h5 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.model-analysis ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+
+.model-analysis {
+  background-color: #dedcdc;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.model-analysis summary {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.model-analysis ul {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.model-analysis li {
+  margin-bottom: 0.6rem;
+}
+
+
+.tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: white;
+}
+
+.tag-warning {
+  background-color: #f39c12;
+}
+
+.tag-good {
+  background-color: #27ae60;
+}
+
+.tag-bad {
+  background-color: #e74c3c;
+}
+
+.tag-best {
+  background-color: #9b59b6;
 }
