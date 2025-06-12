@@ -4,6 +4,7 @@ import Plot from 'react-plotly.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './PredictionPage.css'
+const BASE_URL = "https://time-series-forecasting-of-tsmc-stock.onrender.com";
 
 const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 
@@ -62,7 +63,7 @@ export default function PredictionPage() {
   const handlePredict = async () => {
     setLoading(true)
     try {
-      const res = await axios.post('http://localhost:5001/api/predict', { model }, {
+      const res = await axios.post(`${BASE_URL}/api/predict`, { model }, {
         headers: { 'Content-Type': 'application/json' }
       })
       const flatten = arr => arr.flat()
