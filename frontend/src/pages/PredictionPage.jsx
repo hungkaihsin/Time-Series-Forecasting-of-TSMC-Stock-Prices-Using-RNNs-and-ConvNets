@@ -105,7 +105,14 @@ export default function PredictionPage() {
           {loading ? 'Running…' : 'Run prediction'}
         </button>
       </div>
-
+      {loading && (
+        <div className="loading-section">
+          <div className="progress-bar">
+            <div className="progress-bar-fill" />
+          </div>
+          <p>Predicting… please wait. Backend may take a few seconds to respond.</p>
+        </div>
+      )}
       {result && (
         <div className="results">
           <div className="metrics">

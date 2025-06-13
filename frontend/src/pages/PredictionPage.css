@@ -176,3 +176,31 @@
 .tag-best {
   background-color: #9b59b6;
 }
+
+.loading-section {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 600px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 0.5rem auto;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #f6c800, #ffd500, #f6c800);
+  animation: loading 1.5s infinite linear;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
