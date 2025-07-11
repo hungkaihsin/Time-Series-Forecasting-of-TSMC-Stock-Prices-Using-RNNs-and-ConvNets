@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './PredictionPage.css'
-const BASE_URL = "https://time-series-forecasting-of-tsmc-stock.onrender.com";
+const BASE_URL = "http://127.0.0.1:5001"
 
 const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 
