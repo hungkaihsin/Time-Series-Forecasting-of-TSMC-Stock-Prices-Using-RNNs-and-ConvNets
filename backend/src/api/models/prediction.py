@@ -1,4 +1,5 @@
-from src.api.models.tools.tuner import lstm_tuner, gru_tuner, conv1d_tuner, ffn_model_tuner
+import tensorflow as tf
+from keras.models import load_model
 from src.api.models.tools.general import get_filepath
 from src.api.models.preprocess import preprocess_dataset
 from sklearn.metrics import mean_absolute_error
@@ -26,15 +27,44 @@ def convert_to_serializable(obj):
     return obj
 
 
-def lstm_prediction():
-    best_model = lstm_tuner()
+def quantize_model(model):
+    converter = tf.lite.TFLiteConverter.from_keras_model(model)
+    converter.optimizations = [tf.lite.Optimize.DEFAULT]
+    converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+    converter._experimental_lower_tensor_list_ops = False
+    tflite_model = converter.convert()
+    return tflite_model
 
-    y_val_pred_scaled = best_model.predict(X_val)
+def run_tflite_prediction(tflite_model, input_data):
+    interpreter = tf.lite.Interpreter(model_content=tflite_model)
+    input_details = interpreter.get_input_details()[0]
+    output_details = interpreter.get_output_details()[0]
+
+    # Ensure input data type matches model's expected type
+    if input_details['dtype'] == np.float32 and input_data.dtype != np.float32:
+        input_data = input_data.astype(np.float32)
+
+    # Resize the input tensor to match the batch size of the input data
+    interpreter.resize_tensor_input(input_details['index'], input_data.shape)
+    interpreter.allocate_tensors()
+
+    interpreter.set_tensor(input_details['index'], input_data)
+    interpreter.invoke()
+    
+    output_data = interpreter.get_tensor(output_details['index'])
+    return output_data
+
+
+def lstm_prediction():
+    best_model = load_model('src/api/models/saved_models/lstm_model.h5', compile=False)
+    quantized_model = quantize_model(best_model)
+
+    y_val_pred_scaled = run_tflite_prediction(quantized_model, X_val)
     y_val_pred = scaler.inverse_transform(y_val_pred_scaled)
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-    y_test_pred_scaled = best_model.predict(X_test)
+    y_test_pred_scaled = run_tflite_prediction(quantized_model, X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
@@ -73,14 +103,15 @@ def lstm_prediction():
 
 
 def gru_prediction():
-    best_model = gru_tuner()
+    best_model = load_model('src/api/models/saved_models/gru_model.h5', compile=False)
+    quantized_model = quantize_model(best_model)
 
-    y_val_pred_scaled = best_model.predict(X_val)
+    y_val_pred_scaled = run_tflite_prediction(quantized_model, X_val)
     y_val_pred = scaler.inverse_transform(y_val_pred_scaled)
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-    y_test_pred_scaled = best_model.predict(X_test)
+    y_test_pred_scaled = run_tflite_prediction(quantized_model, X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
@@ -120,14 +151,15 @@ def gru_prediction():
 
 
 def conv1d_prediction():
-    best_model = conv1d_tuner()
+    best_model = load_model('src/api/models/saved_models/conv1d_model.h5', compile=False)
+    quantized_model = quantize_model(best_model)
 
-    y_val_pred_scaled = best_model.predict(X_val)
+    y_val_pred_scaled = run_tflite_prediction(quantized_model, X_val)
     y_val_pred = scaler.inverse_transform(y_val_pred_scaled)
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-    y_test_pred_scaled = best_model.predict(X_test)
+    y_test_pred_scaled = run_tflite_prediction(quantized_model, X_test)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
@@ -167,16 +199,17 @@ def conv1d_prediction():
 
 
 def ffn_prediction():
-    best_model = ffn_model_tuner()
+    best_model = load_model('src/api/models/saved_models/ffn_model.h5', compile=False)
+    quantized_model = quantize_model(best_model)
     X_val_ff = X_val.reshape(X_val.shape[0], -1)
     X_test_ff = X_test.reshape(X_test.shape[0], -1)
 
-    y_val_pred_scaled = best_model.predict(X_val_ff)
+    y_val_pred_scaled = run_tflite_prediction(quantized_model, X_val_ff)
     y_val_pred = scaler.inverse_transform(y_val_pred_scaled)
     y_val_true = scaler.inverse_transform(y_val)
     mae_val_dollar = mean_absolute_error(y_val_true, y_val_pred)
 
-    y_test_pred_scaled = best_model.predict(X_test_ff)
+    y_test_pred_scaled = run_tflite_prediction(quantized_model, X_test_ff)
     y_test_pred = scaler.inverse_transform(y_test_pred_scaled)
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
