@@ -6,16 +6,6 @@ from sklearn.metrics import mean_absolute_error
 import numpy as np
 import pandas as pd
 
-
-# Import data
-data = preprocess_dataset(get_filepath())
-X_val, y_val = data['X_val'], data['y_val']
-X_test, y_test = data['X_test'], data['y_test']
-scaler = data['target_scaler']
-df = data['df']
-df['Price'] = pd.to_datetime(df['Price'])
-
-# covert to allow flask app to fetch
 def convert_to_serializable(obj):
     """Convert numpy arrays and other non-serializable objects to lists"""
     if isinstance(obj, np.ndarray):
@@ -116,21 +106,17 @@ def gru_prediction():
     y_test_true = scaler.inverse_transform(y_test)
     mae_test_dollar = mean_absolute_error(y_test_true, y_test_pred)
     
-    # Need to make sure the dataset contains the same column name
     Min = float(df['Close'].tail(60).min())
     Max = float(df['Close'].tail(60).max())
     Average_price = (Min + Max) / 2
     mae_test_percent = (mae_test_dollar / Average_price) * 100
     mae_val_percentage = (mae_val_dollar / Average_price) * 100
     
-    
-    # for plotting
     val_start_index = data["train_size"] + 21
     test_start_index = data["train_size"] + data["val_size"] + 21
     val_dates = df["Price"].iloc[val_start_index : val_start_index + len(y_val_true)].dt.strftime('%Y-%m-%d').tolist()
     test_dates = df["Price"].iloc[test_start_index : test_start_index + len(y_test_true)].dt.strftime('%Y-%m-%d').tolist()
 
-    # Export result - Convert DataFrame to dictionary and make everything JSON serializable
     result = {
         'mae_val_dollar': float(mae_val_dollar),
         'mae_val_percentage': float(mae_val_percentage),
