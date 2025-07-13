@@ -81,6 +81,8 @@ npm run dev
 
 ## Model Performance Summary
 
+**Note:** Due to memory constraints on the deployment platform, the LSTM and GRU models are not available in the live demo.
+
 | **Model** | **Val MAE ($ / %)** | **Test MAE ($ / %)** | **Comment**                          |
 |-----------|----------------------|------------------------|---------------------------------------|
 | **LSTM**  | 1.40 (0.73%)         | 6.56 (3.40%)           |  Overfits despite strong training    |

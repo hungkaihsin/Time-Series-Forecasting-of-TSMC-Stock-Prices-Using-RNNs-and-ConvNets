@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import './PredictionPage.css'
 const BASE_URL = "https://time-series-forecasting-of-tsmc-stock.onrender.com"
 
-const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
+const MODELS = ['conv1d', 'ffn']
 
 function AnalysisAccordion({ selectedModel }) {
   const insights = {
@@ -97,6 +97,8 @@ export default function PredictionPage() {
         <label>
           Model Selection:
           <select value={model} onChange={e => setModel(e.target.value)}>
+            <option value="lstm" disabled title="Model unavailable due to memory constraints">LSTM (Unavailable)</option>
+            <option value="gru" disabled title="Model unavailable due to memory constraints">GRU (Unavailable)</option>
             {MODELS.map(m => <option key={m} value={m}>{m.toUpperCase()}</option>)}
           </select>
         </label>
