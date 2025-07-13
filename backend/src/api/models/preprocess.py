@@ -15,6 +15,7 @@ def preprocess_dataset(file_path, look_back=21, foresight=1):
     df = pd.read_csv(file_path)
     df = df.drop(index=[0, 1])
     df.ffill(inplace=True)
+    df['Price'] = pd.to_datetime(df['Price'])
 
     feature_cols = ['High', 'Low', 'Open', 'Volume']
     target_col = 'Close'

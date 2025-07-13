@@ -46,6 +46,15 @@ def run_tflite_prediction(tflite_model, input_data):
 
 
 def lstm_prediction():
+    file_path = 'src/dataset/TSM_data.csv'
+    data = preprocess_dataset(file_path)
+    X_val = data['X_val']
+    y_val = data['y_val']
+    X_test = data['X_test']
+    y_test = data['y_test']
+    scaler = data['target_scaler']
+    df = data['df']
+
     best_model = load_model('src/api/models/saved_models/lstm_model.h5', compile=False)
     quantized_model = quantize_model(best_model)
 
@@ -93,6 +102,15 @@ def lstm_prediction():
 
 
 def gru_prediction():
+    file_path = 'src/dataset/TSM_data.csv'
+    data = preprocess_dataset(file_path)
+    X_val = data['X_val']
+    y_val = data['y_val']
+    X_test = data['X_test']
+    y_test = data['y_test']
+    scaler = data['target_scaler']
+    df = data['df']
+
     best_model = load_model('src/api/models/saved_models/gru_model.h5', compile=False)
     quantized_model = quantize_model(best_model)
 
@@ -137,6 +155,15 @@ def gru_prediction():
 
 
 def conv1d_prediction():
+    file_path = 'src/dataset/TSM_data.csv'
+    data = preprocess_dataset(file_path)
+    X_val = data['X_val']
+    y_val = data['y_val']
+    X_test = data['X_test']
+    y_test = data['y_test']
+    scaler = data['target_scaler']
+    df = data['df']
+
     best_model = load_model('src/api/models/saved_models/conv1d_model.h5', compile=False)
     quantized_model = quantize_model(best_model)
 
@@ -185,6 +212,15 @@ def conv1d_prediction():
 
 
 def ffn_prediction():
+    file_path = 'src/dataset/TSM_data.csv'
+    data = preprocess_dataset(file_path)
+    X_val = data['X_val']
+    y_val = data['y_val']
+    X_test = data['X_test']
+    y_test = data['y_test']
+    scaler = data['target_scaler']
+    df = data['df']
+
     best_model = load_model('src/api/models/saved_models/ffn_model.h5', compile=False)
     quantized_model = quantize_model(best_model)
     X_val_ff = X_val.reshape(X_val.shape[0], -1)
