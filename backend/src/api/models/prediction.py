@@ -1,4 +1,5 @@
 import tensorflow as tf
+import gc
 from keras.models import load_model
 from src.api.models.tools.general import get_filepath
 from src.api.models.preprocess import preprocess_dataset
@@ -98,6 +99,7 @@ def lstm_prediction():
         "test_dates": test_dates,
     }
 
+    gc.collect()
     return result
 
 
@@ -151,6 +153,7 @@ def gru_prediction():
         "test_dates": test_dates,
     }
 
+    gc.collect()
     return result
 
 
@@ -208,6 +211,7 @@ def conv1d_prediction():
         "test_dates": test_dates,
     }
 
+    gc.collect()
     return result
 
 
@@ -268,4 +272,5 @@ def ffn_prediction():
         "test_dates": test_dates,
     }
 
+    gc.collect()
     return result
