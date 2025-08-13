@@ -1,97 +1,78 @@
 # Time Series Forecasting of TSMC Stock Prices Using RNNs and ConvNets
 
+[Live demo here](https://time-series-forecasting-of-tsmc-stock-3z6u.onrender.com/)
 
-## Introduction
-This project predicts TSMC's next-day closing stock price using historical financial data from Yahoo Finance. It evaluates multiple deep learning models—including LSTM, GRU, Conv1D, and Feedforward Neural Networks (FFN)—to identify the most effective approach for forecasting. The final solution exposes the model via a Flask API and features a modern React-based front-end for interaction.
+This project predicts TSMC's next-day closing stock price using historical financial data from Yahoo Finance. It evaluates multiple deep learning models—including LSTM, GRU, Conv1D, and Feedforward Neural Networks (FFN)—to determine the most effective approach for forecasting. The final solution is deployed via a Flask API and features a modern React-based frontend for interaction and visualization.
 
-<strong>Live Demo</strong>: <a href="https://time-series-forecasting-of-tsmc-stock-3z6u.onrender.com/" target="_blank" rel="noopener noreferrer">Visit the deployed site</a>
+## About The Project
 
-## Features
+This project demonstrates expertise in time series forecasting, deep learning, and full-stack deployment. It covers data preprocessing, model training, evaluation, and serving predictions through a REST API. The backend is powered by Flask, while the frontend is built with React and Vite.
 
-- Data preprocessing and sequence generation for time series modeling
-- Hyperparameter tuning for LSTM, GRU, Conv1D, and FFN models
-- REST API endpoints to trigger predictions
-- Responsive React front-end for visualization and interaction
+## Key Features
 
----
+- **Data Preprocessing:** Cleans and formats Yahoo Finance historical stock data for model input.  
+- **Sequence Generation:** Converts time series into supervised learning format.  
+- **Model Comparison:** Evaluates LSTM, GRU, Conv1D, and FFN architectures.  
+- **Hyperparameter Tuning:** Optimizes model configurations for improved performance.  
+- **Prediction API:** Flask-based REST endpoints to serve predictions.  
+- **Interactive Frontend:** Responsive React UI for visualization and interaction with forecasts.  
 
-## Environment setup
+## Tech Stack
 
-### Project Structure overview
-```
-project-root/
-│
-├── backend/
-│   └── src/api/              # Flask API and models
-│       ├── models/           # Model definitions and tuners
-│       ├── routes/           # Prediction routes
-│       └── app.py            # Main Flask app entry
-│
-├── frontend/
-│   └── src/pages/            # React pages
-│   └── App.jsx               # React routing setup
-│
-└── requirements.txt          # Python dependencies
-```
+- **Frontend:** React, Vite, CSS  
+- **Backend:** Python, Flask  
+- **AI/ML:** TensorFlow/Keras (LSTM, GRU, Conv1D, FFN)  
+- **Data Source:** Yahoo Finance API  
 
-### Backend (Flask API)
+## Getting Started
 
-1. Set up virtual environment (optional but recommended):
-```
-python -m venv .venv
-```
-```
-source .venv/bin/activate  
-```
-or on Windows
-```
-.venv\Scripts\activate 
-```
-2. Install dependencies:
-```
-pip install -r requirements.txt
-```
-3. Start the Flask server:
-```
-python backend/src/api/app.py
-```
-Note: Ensure the backend is running on http://localhost:5001, If using a different port, update proxy settings in vite.config.js. 
+To get a local copy up and running, follow these simple steps.
 
+### Prerequisites
 
+- Node.js and npm  
+- Python 3.x  
 
+### Installation
 
-### Frontend (React)
+1. **Clone the repo**
+    ```sh
+    git clone https://github.com/your-username/tsmc_stock_forecasting.git
+    ```
 
-1. Navigate to the frontend folder:
-```
-cd frontend
-```
+2. **Backend Setup**
+    ```sh
+    cd backend
+    pip install -r requirements.txt
+    python src/api/app.py
+    ```
+    Ensure the backend is running at `http://localhost:5001`. If using a different port, update the proxy settings in `vite.config.js`.
 
-2. Install Node.js dependencies:
-```
-npm install
-```
-Note: need to install Node before hand
-
-3.	Run the development server:
-```
-npm run dev
-```
-4.	Visit http://localhost:5173 in your browser to access the app.
+3. **Frontend Setup**
+    ```sh
+    cd frontend
+    npm install
+    npm run dev
+    ```
+    Open `http://localhost:5173` in your browser.
 
 ## Model Performance Summary
 
 **Note:** Due to memory constraints on the deployment platform, the LSTM and GRU models are not available in the live demo.
 
 | **Model** | **Val MAE ($ / %)** | **Test MAE ($ / %)** | **Comment**                          |
-|-----------|----------------------|------------------------|---------------------------------------|
-| **LSTM**  | 1.40 (0.73%)         | 6.56 (3.40%)           |  Overfits despite strong training    |
-| **GRU**   | 1.40 (0.72%)         | 4.27 (2.21%)           |  Balanced fit and generalization     |
-| **Conv1D**| 2.81 (1.46%)         | 8.81 (4.56%)           | Underperforms on both sets          |
-| **FFN**   | 1.66 (0.86%)         | 4.24 (2.19%)           | Best generalization performance      |
-
+|-----------|---------------------|----------------------|---------------------------------------|
+| **LSTM**  | 1.40 (0.73%)         | 6.56 (3.40%)          | Overfits despite strong training     |
+| **GRU**   | 1.40 (0.72%)         | 4.27 (2.21%)          | Balanced fit and generalization      |
+| **Conv1D**| 2.81 (1.46%)         | 8.81 (4.56%)          | Underperforms on both sets           |
+| **FFN**   | 1.66 (0.86%)         | 4.24 (2.19%)          | Best generalization performance      |
 
 ## Conclusion
 
-**The GRU and FFN models demonstrate the most reliable generalization to unseen data and are recommended for deployment.
-While LSTM showed strong performance during validation, it exhibited signs of overfitting.**
+The **GRU** and **FFN** models demonstrate the most reliable generalization to unseen data and are recommended for deployment. While LSTM showed strong validation performance, it exhibited signs of overfitting.
+
+## Contact
+
+Daniel – [k_hung2@u.pacific.edu](mailto:k_hung2@u.pacific.edu)  
+
+Project Link: [https://github.com/hungkaihsin/tsmc_stock_forecasting](https://github.com/hungkaihsin/tsmc_stock_forecasting)
