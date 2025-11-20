@@ -1,0 +1,16 @@
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5001:5000"
+    # The container is accessible within the docker network by the service name 'backend'
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

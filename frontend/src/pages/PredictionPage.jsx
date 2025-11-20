@@ -4,9 +4,7 @@ import Plot from 'react-plotly.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './PredictionPage.css'
-const BASE_URL = "https://time-series-forecasting-of-tsmc-stock.onrender.com"
-
-const MODELS = ['conv1d', 'ffn']
+const MODELS = ['lstm', 'gru', 'conv1d', 'ffn']
 
 function AnalysisAccordion({ selectedModel }) {
   const insights = {
@@ -63,7 +61,7 @@ export default function PredictionPage() {
   const handlePredict = async () => {
     setLoading(true)
     try {
-      const res = await axios.post(`${BASE_URL}/api/predict`, { model }, {
+      const res = await axios.post(`/api/predict`, { model }, {
         headers: { 'Content-Type': 'application/json' }
       })
       const flatten = arr => arr.flat()
@@ -97,8 +95,6 @@ export default function PredictionPage() {
         <label>
           Model Selection:
           <select value={model} onChange={e => setModel(e.target.value)}>
-            <option value="lstm" disabled title="Model unavailable due to memory constraints">LSTM (Unavailable)</option>
-            <option value="gru" disabled title="Model unavailable due to memory constraints">GRU (Unavailable)</option>
             {MODELS.map(m => <option key={m} value={m}>{m.toUpperCase()}</option>)}
           </select>
         </label>
