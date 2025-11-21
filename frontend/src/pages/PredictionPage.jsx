@@ -61,7 +61,7 @@ export default function PredictionPage() {
   const handlePredict = async () => {
     setLoading(true)
     try {
-      const res = await axios.post(`/api/predict`, { model }, {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/predict`, { model }, {
         headers: { 'Content-Type': 'application/json' }
       })
       const flatten = arr => arr.flat()
